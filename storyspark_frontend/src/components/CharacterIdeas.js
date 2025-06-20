@@ -71,7 +71,7 @@ function CharacterIdeas() {
       >
         {loading ? "Generating..." : "Generate"}
       </button>
-      <div className="result-area">
+      <div className="result-area" style={{ minHeight: 170, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         {error && <span className="error-text">⚠️ {error}</span>}
         {loading && (
           <span style={{ color: "var(--primary)" }}>Generating character...</span>
@@ -83,20 +83,22 @@ function CharacterIdeas() {
             ref={charCardRef}
             style={{
               background: "var(--surface-highlight)",
-              borderRadius: "14px",
+              borderRadius: "16px",
               border: justGenerated
                 ? "2.5px solid var(--accent)"
                 : "1px solid var(--border-color)",
               boxShadow: justGenerated
-                ? "0 4px 14px #fee7c438, 0 2px 16px #fffef922"
+                ? "0 4px 18px #fee7c438, 0 2px 17px #fffef922"
                 : "0 1px 8px #e9f2ff22",
-              padding: "18px 12px 15px 12px",
+              padding: "22px 18px 19px 18px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              minHeight: 162,
+              minWidth: "245px",
+              maxWidth: 320,
+              minHeight: 135,
               margin: "5px 0 7px 0",
-              transition: "border-color 0.24s, box-shadow 0.23s",
+              transition: "border-color 0.28s, box-shadow 0.23s",
               outline: "none"
             }}
             tabIndex={-1}
@@ -105,25 +107,25 @@ function CharacterIdeas() {
             <img
               src={character.avatarUrl}
               alt={`Avatar of ${character.name}`}
-              width={72}
-              height={72}
+              width={85}
+              height={85}
               loading="lazy"
               style={{
-                borderRadius: "13px",
+                borderRadius: "14px",
                 background: "#fafcff",
                 border: "2px solid var(--primary)",
                 boxShadow: "0 1px 14px #bbe3fc33",
-                marginBottom: 11,
-                marginTop: 2,
+                marginBottom: 15,
+                marginTop: 1,
                 outline: justGenerated ? "2.5px solid var(--accent)" : "none",
                 outlineOffset: "2px"
               }}
             />
             <div
               style={{
-                fontWeight: 700,
-                fontSize: "1.18em",
-                marginBottom: 4,
+                fontWeight: 800,
+                fontSize: "1.23em",
+                marginBottom: 5,
                 textAlign: "center",
                 color: "var(--primary)",
                 textShadow: "0 1px 0 #fff8,0 2px 8px #e4eeff32"
@@ -135,10 +137,10 @@ function CharacterIdeas() {
               <div
                 style={{
                   color: "var(--text-secondary)",
-                  fontSize: "1.06em",
+                  fontSize: "1.07em",
                   textAlign: "center",
                   marginTop: 2,
-                  lineHeight: 1.38
+                  lineHeight: 1.44
                 }}
               >
                 {character.description}
