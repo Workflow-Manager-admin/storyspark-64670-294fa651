@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 
+import StoryCreation from './components/StoryCreation';
+import CharacterIdeas from './components/CharacterIdeas';
+import ComicPlotDesign from './components/ComicPlotDesign';
+
 // PUBLIC_INTERFACE
 function App() {
   return (
@@ -23,21 +27,24 @@ function App() {
       <main className="main-content">
         <section id="story" className="feature-panel">
           <h2 className="feature-title">Story Creator</h2>
-          <p className="feature-desc">
-            Dream up a tale! (Feature coming soon...)
-          </p>
+          <div className="feature-desc" style={{ marginBottom: 14 }}>
+            Dream up a tale and let AI spin a story from your imagination.
+          </div>
+          <StoryCreation />
         </section>
         <section id="characters" className="feature-panel">
           <h2 className="feature-title">Character Ideas</h2>
-          <p className="feature-desc">
-            Generate a unique cast! (Feature coming soon...)
-          </p>
+          <div className="feature-desc" style={{ marginBottom: 14 }}>
+            Generate a unique cast of characters, heroes, and companions.
+          </div>
+          <CharacterIdeas />
         </section>
         <section id="comic-plot" className="feature-panel">
           <h2 className="feature-title">Comic Plot Designer</h2>
-          <p className="feature-desc">
-            Craft amazing comic plots! (Feature coming soon...)
-          </p>
+          <div className="feature-desc" style={{ marginBottom: 14 }}>
+            Craft amazing comic plots with story panel suggestions.
+          </div>
+          <ComicPlotDesign />
         </section>
       </main>
 
