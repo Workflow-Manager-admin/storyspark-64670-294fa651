@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/storyspark-64670-294fa651/storyspark_frontend"
+}
