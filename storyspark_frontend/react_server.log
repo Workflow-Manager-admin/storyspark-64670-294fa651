@@ -21,14 +21,14 @@ cacheable modules 1.29 MiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB 2 modules
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1326 ms
+webpack 5.99.9 compiled successfully in 1235 ms
 assets by status 1.98 KiB [cached] 1 asset
 assets by path *.js 1.44 MiB
   asset bundle.js 1.43 MiB [emitted] (name: main)
-  asset main.a6524061862c4bd0b322.hot-update.js 8.85 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.a6524061862c4bd0b322.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.44 MiB = bundle.js 1.43 MiB main.a6524061862c4bd0b322.hot-update.js 8.85 KiB
+  asset main.b21aa0fd5d93a5e498ea.hot-update.js 8.96 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.b21aa0fd5d93a5e498ea.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.44 MiB = bundle.js 1.43 MiB main.b21aa0fd5d93a5e498ea.hot-update.js 8.96 KiB
 cached modules 1.29 MiB [cached] 47 modules
 runtime modules 27.5 KiB 14 modules
-./src/components/CharacterIdeas.js 5.77 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 132 ms
+./src/components/CharacterIdeas.js 5.88 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 96 ms

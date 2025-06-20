@@ -4,6 +4,7 @@ import { generateCharacters } from "../api/characterApi";
 /**
  * CharacterIdeas - Feature component for generating a single character immediately.
  * Only the most recently generated character (avatar + text) is displayed and highlighted.
+ * All previous characters/history/list are removed from UI.
  */
 // PUBLIC_INTERFACE
 function CharacterIdeas() {
@@ -14,36 +15,37 @@ function CharacterIdeas() {
   const [justGenerated, setJustGenerated] = useState(false);
   const charCardRef = useRef(null);
 
-  // Scroll the result into view if newly generated
+  // Move focus and scroll to new result when character is created
   useEffect(() => {
     if (justGenerated && charCardRef.current) {
+      charCardRef.current.focus();
       charCardRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       setTimeout(() => setJustGenerated(false), 800); // Remove highlight after a moment
     }
   }, [justGenerated]);
 
-  // Button handler for generating a single character
+  // PUBLIC_INTERFACE
   const handleGenerate = async () => {
     setLoading(true);
     setError("");
     setCharacter(null);
     setJustGenerated(false);
     if (!prompt.trim()) {
-      setError("Please enter a description or theme for characters.");
+      setError("Please enter a description or theme for a character.");
       setLoading(false);
       return;
     }
     try {
       const apiRes = await generateCharacters(prompt);
       if (Array.isArray(apiRes.characters) && apiRes.characters.length > 0) {
-        // Display only the first character (remove history)
+        // Only show the first character, removing any previous
         setCharacter(apiRes.characters[0]);
         setJustGenerated(true);
       } else {
         setError("Failed to parse character results.");
       }
     } catch (err) {
-      setError(err.message || "Failed to generate character ideas.");
+      setError(err.message || "Failed to generate character idea.");
     }
     setLoading(false);
   };
@@ -75,13 +77,16 @@ function CharacterIdeas() {
           <span style={{ color: "var(--primary)" }}>Generating character...</span>
         )}
 
+        {/* Only the latest character is shown, never a list/history. */}
         {!loading && !error && character && (
           <div
             ref={charCardRef}
             style={{
               background: "var(--surface-highlight)",
               borderRadius: "14px",
-              border: justGenerated ? "2.5px solid var(--accent)" : "1px solid var(--border-color)",
+              border: justGenerated
+                ? "2.5px solid var(--accent)"
+                : "1px solid var(--border-color)",
               boxShadow: justGenerated
                 ? "0 4px 14px #fee7c438, 0 2px 16px #fffef922"
                 : "0 1px 8px #e9f2ff22",
@@ -91,7 +96,8 @@ function CharacterIdeas() {
               alignItems: "center",
               minHeight: 162,
               margin: "5px 0 7px 0",
-              transition: "border-color 0.24s, box-shadow 0.23s"
+              transition: "border-color 0.24s, box-shadow 0.23s",
+              outline: "none"
             }}
             tabIndex={-1}
             aria-live="polite"
