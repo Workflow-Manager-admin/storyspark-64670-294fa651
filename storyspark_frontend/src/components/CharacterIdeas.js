@@ -58,44 +58,77 @@ function CharacterIdeas() {
 
         {!loading && !error && characters.length > 0 && (
           <div>
-            <div style={{ fontWeight: "600", marginBottom: 7 }}>
+            <div style={{ fontWeight: "600", marginBottom: 9 }}>
               {`🎭 Generated Characters (${characters.length})`}
             </div>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(215px, 1fr))",
+                gap: "18px",
+                width: "100%",
+                marginTop: 5,
+                marginBottom: 4,
+              }}
+            >
               {characters.map((char, idx) => (
-                <li
+                <div
                   key={idx}
                   style={{
+                    background: "var(--surface-highlight)",
+                    borderRadius: "13px",
+                    border: "1px solid var(--border-color)",
+                    padding: "14px 13px 13px 13px",
+                    boxShadow: "0 1px 8px #e9f2ff22",
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    gap: "14px",
-                    background: idx % 2 === 0 ? "transparent" : "var(--surface-highlight)",
-                    borderRadius: "8px",
-                    marginBottom: "9px",
-                    padding: "9px 7px"
+                    minHeight: 164,
                   }}
                 >
                   <img
                     src={char.avatarUrl}
                     alt={`Avatar of ${char.name}`}
-                    width={50}
-                    height={50}
+                    width={64}
+                    height={64}
+                    loading="lazy"
                     style={{
-                      borderRadius: 8,
+                      borderRadius: "12px",
                       background: "#fafcff",
-                      border: "1px solid var(--border-color)",
-                      boxShadow: "0 1px 8px #e5eefd35"
+                      border: "1.5px solid var(--primary)",
+                      boxShadow: "0 1px 12px #bbe3fc33",
+                      marginBottom: 9,
+                      marginTop: 2,
                     }}
                   />
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "1.04em" }}>{char.name}</div>
-                    <div style={{ color: "var(--text-secondary)", fontSize: "0.97em" }}>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: "1.07em",
+                      marginBottom: 3,
+                      textAlign: "center",
+                      color: "var(--primary)",
+                      textShadow: "0 1px 0 #fff8,0 2px 8px #e4eeff32"
+                    }}
+                  >
+                    {char.name}
+                  </div>
+                  {char.description && (
+                    <div
+                      style={{
+                        color: "var(--text-secondary)",
+                        fontSize: "0.98em",
+                        textAlign: "center",
+                        marginTop: 1,
+                        lineHeight: 1.4
+                      }}
+                    >
                       {char.description}
                     </div>
-                  </div>
-                </li>
+                  )}
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
         {!loading && !error && characters.length === 0 && (
