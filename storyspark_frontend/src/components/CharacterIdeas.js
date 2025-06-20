@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { generateCharacters } from "../api/characterApi";
 
 /**
  * CharacterIdeas - Feature component for generating character ideas.
@@ -11,19 +12,22 @@ function CharacterIdeas() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setLoading(true);
     setError("");
     setResult("");
-    setTimeout(() => {
-      if (!prompt.trim()) {
-        setError("Please enter a description or theme for characters.");
-        setLoading(false);
-        return;
-      }
-      setResult(`🎭 (Generated Characters for: "${prompt}")\n\n1. Alexia the Time-Traveler\n2. Bolt the Cyberfox\n3. Luna, Guardian of Dreams\n... [This is a placeholder result.]`);
+    if (!prompt.trim()) {
+      setError("Please enter a description or theme for characters.");
       setLoading(false);
-    }, 1100);
+      return;
+    }
+    try {
+      const apiRes = await generateCharacters(prompt);
+      setResult(apiRes.result);
+    } catch (err) {
+      setError(err.message || "Failed to generate character ideas.");
+    }
+    setLoading(false);
   };
 
   return (

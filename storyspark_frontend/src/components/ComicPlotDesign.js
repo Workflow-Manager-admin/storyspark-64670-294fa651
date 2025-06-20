@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { generatePlot } from "../api/plotApi";
 
 /**
  * ComicPlotDesign - Feature component for designing comic plots with prompt input and AI result area.
@@ -11,19 +12,22 @@ function ComicPlotDesign() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setLoading(true);
     setError("");
     setResult("");
-    setTimeout(() => {
-      if (!prompt.trim()) {
-        setError("Please write a theme or comic plot idea.");
-        setLoading(false);
-        return;
-      }
-      setResult(`🖼️ (Generated Comic Plot for: "${prompt}")\n\nPanel 1: A mysterious signal is detected...\nPanel 2: Heroes gather to investigate...\nPanel 3: A twist is revealed! [This is a placeholder result.]`);
+    if (!prompt.trim()) {
+      setError("Please write a theme or comic plot idea.");
       setLoading(false);
-    }, 1100);
+      return;
+    }
+    try {
+      const apiRes = await generatePlot(prompt);
+      setResult(apiRes.result);
+    } catch (err) {
+      setError(err.message || "Failed to generate comic plot.");
+    }
+    setLoading(false);
   };
 
   return (

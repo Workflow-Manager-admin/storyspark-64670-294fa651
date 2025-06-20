@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { generateStory } from "../api/storyApi";
 
 /**
  * StoryCreation - Feature component for generating and displaying AI-generated stories.
@@ -11,21 +12,23 @@ function StoryCreation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Placeholder "Generate" logic; to be connected with the real API later.
-  const handleGenerate = () => {
+  // Handles async API-based story generation logic.
+  const handleGenerate = async () => {
     setLoading(true);
     setError("");
     setResult("");
-    // Emulate async API with a timeout
-    setTimeout(() => {
-      if (!prompt.trim()) {
-        setError("Please enter a prompt to generate a story.");
-        setLoading(false);
-        return;
-      }
-      setResult(`✨ (Generated Story for prompt: "${prompt}")\n\nOnce upon a time... [This is a placeholder result.]`);
+    if (!prompt.trim()) {
+      setError("Please enter a prompt to generate a story.");
       setLoading(false);
-    }, 1100);
+      return;
+    }
+    try {
+      const apiRes = await generateStory(prompt);
+      setResult(apiRes.result);
+    } catch (err) {
+      setError(err.message || "Failed to generate story.");
+    }
+    setLoading(false);
   };
 
   return (
