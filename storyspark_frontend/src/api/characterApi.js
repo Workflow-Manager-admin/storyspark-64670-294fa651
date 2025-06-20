@@ -2,28 +2,30 @@
 // API utility for character-related operations using placeholder endpoints.
 //
  
-// PUBLIC_INTERFACE
+/**
+ * Calls the character generation API endpoint with the given prompt.
+ * Returns { characters: [{ name, description, avatarUrl }] } on success, throws error on failure.
+ */
 export async function generateCharacters(prompt) {
-  /**
-   * Calls the character generation API endpoint with the given prompt.
-   * Returns { result: string } on success, throws error on failure.
-   */
+  // Note: In a real integration, swap the character generation logic and data as needed.
   try {
-    // Placeholder URL; swap with real endpoint as needed.
-    const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt }),
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    // Fake a list of characters with the placeholder data.id
-    return {
-      result:
-        `🎭 (Generated Characters for: "${prompt}")\n\n1. Alexia the Time-Traveler\n2. Bolt the Cyberfox\n3. Luna, Guardian of Dreams\n... [API placeholder id: ${data.id}]`
-    };
+    // Placeholder for calling an API - for now, mimic 3 characters
+    // Below could be replaced in the future with a real API call and parsing
+    const fakeCharacters = [
+      { name: "Alexia the Time-Traveler", description: "A quirky inventor with a futuristic backpack that lets her visit any era." },
+      { name: "Bolt the Cyberfox", description: "A robotic fox with a lightning bolt tail; a quick-witted sidekick." },
+      { name: "Luna, Guardian of Dreams", description: "A mystical hero who saves dreamers from their nightmares each night." }
+    ];
+
+    // Attach Dicebear bottts avatar SVG URLs to each character, using URI encoding
+    const withAvatars = fakeCharacters.map((c) => ({
+      ...c,
+      avatarUrl: `https://avatars.dicebear.com/api/bottts/${encodeURIComponent(c.name)}.svg`
+    }));
+
+    // Simulate a network delay (remove for production)
+    await new Promise((res) => setTimeout(res, 550));
+    return { characters: withAvatars };
   } catch (error) {
     throw new Error(
       error.message

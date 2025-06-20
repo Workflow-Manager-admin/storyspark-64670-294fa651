@@ -32,25 +32,28 @@ function ComicPlotDesign() {
 
   return (
     <div style={{ width: "100%" }}>
-      <label htmlFor="plot-prompt" style={{ fontWeight: 500 }}>
+      <label htmlFor="plot-prompt" className="label">
         Comic Plot Theme
       </label>
       <textarea
         id="plot-prompt"
         className="input-textarea"
-        style={{ width: "100%", minHeight: 60, marginBottom: 10, borderRadius: 7, border: "1px solid var(--border-color)", padding: 10, fontSize: "1.05rem" }}
         placeholder="Describe a comic theme, genre, or a plot idea..."
         value={prompt}
         onChange={e => setPrompt(e.target.value)}
         disabled={loading}
       />
-      <button className="btn" style={{ marginBottom: 15 }} onClick={handleGenerate} disabled={loading}>
+      <button className="btn" onClick={handleGenerate} disabled={loading} style={{ marginBottom: 10 }}>
         {loading ? "Generating..." : "Generate"}
       </button>
-      <div style={{ minHeight: 54, width: "100%", background: "#f8fafb", borderRadius: 7, padding: 11, marginTop: 6, border: "1px solid var(--surface-highlight)", color: "#121924" }}>
-        {error && <span style={{ color: "#c10000" }}>⚠️ {error}</span>}
-        {!loading && !error && result && <pre style={{ margin: 0, whiteSpace: "pre-wrap" }}>{result}</pre>}
-        {!loading && !error && !result && <span style={{ color: "var(--text-secondary)" }}>Your comic plot will appear here.</span>}
+      <div className="result-area">
+        {error && <span className="error-text">⚠️ {error}</span>}
+        {!loading && !error && result && <span>{result}</span>}
+        {!loading && !error && !result && (
+          <span style={{ color: "var(--text-secondary)" }}>
+            Your comic plot will appear here.
+          </span>
+        )}
         {loading && <span style={{ color: "var(--primary)" }}>Generating comic plot...</span>}
       </div>
     </div>
